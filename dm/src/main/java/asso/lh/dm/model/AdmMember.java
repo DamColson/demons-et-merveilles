@@ -42,6 +42,6 @@ public class AdmMember {
 	@OneToMany(mappedBy = "gameMaster")
 	private List<AdmTable> tables;
 	
-//	@Transient
-//	private List<AdmTable> memberToTables;
+	@OneToMany(mappedBy = "member")
+	private List<AdmPlayerTable> playersTable;
 }
