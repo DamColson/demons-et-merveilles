@@ -14,6 +14,6 @@ public interface IDAOAdmGame extends JpaRepository<AdmGame, Integer> {
 
 	Optional<AdmGame> findByName(String name);
 	
-	@Query("select g from AdmGame g where g.themes = :theme")
+	@Query("select g from AdmGame g left join fetch g.themes as t where t = :theme")
 	List<AdmGame> findByTheme(@Param("theme") Theme theme);
 }
