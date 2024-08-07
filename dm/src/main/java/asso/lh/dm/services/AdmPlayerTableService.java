@@ -38,10 +38,12 @@ public class AdmPlayerTableService {
 		if(playerTable==null) {
 			throw new RuntimeException("élément null");
 		}
+		
 		MemberTableKey key = new MemberTableKey();
 		key.setMemberId(playerTable.getMember().getId());
 		key.setTableId(playerTable.getTable().getId());
 		playerTable.setId(key);
+		playerTable.setSelected(false);
 		
 		return daoPlayerTable.save(playerTable);
 	}
