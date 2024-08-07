@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import asso.lh.dm.dao.IDAOAdmPlayerTable;
 import asso.lh.dm.dao.IDAOAdmTable;
 import asso.lh.dm.model.AdmGame;
 import asso.lh.dm.model.AdmMember;
+import asso.lh.dm.model.AdmPlayerTable;
 import asso.lh.dm.model.AdmTable;
 
 @Service
@@ -16,6 +18,8 @@ public class AdmTableService {
 
 	@Autowired
 	private IDAOAdmTable daoAdmTable;
+	@Autowired
+	private IDAOAdmPlayerTable daoPlayerTable;
 	
 	public List<AdmTable> getAll(){
 		return daoAdmTable.findAll();
@@ -67,6 +71,9 @@ public class AdmTableService {
 	}
 	
 	public void delete(AdmTable table) {
+		List<AdmPlayerTable> playersTable = daoPlayerTable.findAllByTable(table);
+		daoPlayerTable.deleteAll(playersTable);
+		daoAdmTable.delete(table);
 		
 	}
 }

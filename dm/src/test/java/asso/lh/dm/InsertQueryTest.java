@@ -90,7 +90,38 @@ class InsertQueryTest {
 				+ "Pas de sacrifice héroïque chez moi, seules les abysses vous attendent après.\r\n"
 				+ "\r\n"
 				+ "La demande : Pour pouvoir jouer il suffit de trouver une idée de perso, et d'écrire quelques lignes dessus son état psychologique, sa famille, sa vision du monde, son métier... et un évènement anormal qu'il a vécu, ou croit avoir vécu.");
+		
+		AdmGame game2 = new AdmGame();
+		game2.setName("Ravnica");
+		List<Theme> themes2 = new ArrayList<>();
+		themes2.add(Theme.Enquête);
+		themes2.add(Theme.Conspiration);
+		themes2.add(Theme.Heroic_fantasy);
+		game2.setThemes(themes2);
+		game2.setDescription("Le monde de Ravnica était dominé depuis des dizaines de milliers d'années par des puissantes factions.\r\n"
+				+ "Ces factions s'affrontaient régulièrement.\r\n"
+				+ "Il y a environ 10.000 ans, ce conflit atteint de tels sommets de destruction que la planète elle même répondit en envoyant des abominations dévoreuses de magie nommées les Nephilims.\r\n"
+				+ "Les groupes les plus puissants du moment durent s'allier pour les vaincre et ne parvinrent pas à les détruire définitivement.\r\n"
+				+ "Pour éviter que ça ne se reproduise les dix groupes les plus puissants s'accordèrent sur la fondation d'un pacte : Le Pacte des Guildes.\r\n"
+				+ "Il créèrent une puissante relique intelligente et y gravèrent des lois magiques qu'ils seraient obligés de suivre.\r\n"
+				+ "\r\n"
+				+ "Chaque Guilde devait avoir un rôle et différentes missions à respecter pour que la société perdure.\r\n"
+				+ "\r\n"
+				+ "Cela a bien fonctionné, voila près de 10.000 ans que le pacte tient.\r\n"
+				+ "Mais de sombres volontés s’attellent à le briser avant la très attendue célébration du Dix-millième.\r\n"
+				+ "\r\n"
+				+ "Et puisque actuellement personne ne conçoit un monde sans les Guildes, ça sonne comme une annonce d'apocalypse.\r\n"
+				+ "\r\n"
+				+ "\r\n"
+				+ "Ravnica est un monde de genre médiéval hautement fantastique.\r\n"
+				+ "\r\n"
+				+ "Les joueurs incarnent (généralement) des membres de guilde très puissants\r\n"
+				+ "\r\n"
+				+ "Les surfaces naturelles du monde (montagne comme océans) sont recouverts par la cité, il n'existe presque plus aucun lieu réellement naturel.\r\n"
+				+ "\r\n"
+				+ "Et les complots vont bon train");	
 		gameSrv.insert(game);
+		gameSrv.insert(game2);
 	
 	}
 	
@@ -141,6 +172,12 @@ class InsertQueryTest {
 		poupoule.setPassword("poupoule");
 		poupoule.setRole(Role.ROLE_BUREAU);
 		
+		AdmMember anonymous = new AdmMember();
+		anonymous.setLogin("Anonyme");
+		anonymous.setMail("anonyme@gmail.com");
+		anonymous.setPassword("Anonyme");
+		anonymous.setRole(Role.ROLE_BUREAU);	
+		
 		memberSrv.insert(brice);
 		memberSrv.insert(theo);
 		memberSrv.insert(damien);
@@ -148,6 +185,7 @@ class InsertQueryTest {
 		memberSrv.insert(lenan);
 		memberSrv.insert(william);
 		memberSrv.insert(poupoule);
+		memberSrv.insert(anonymous);
 		
 	}
 
@@ -166,7 +204,18 @@ class InsertQueryTest {
 		table.setOpenToNewPlayer(false);
 		table.setRequirement("respecter la demande dans la description");
 		
+		AdmTable table2 = new AdmTable();
+		table2.setDate(LocalDate.of(2024, 8, 17));
+		table2.setEstimatedDuration("14h-00h");
+		AdmGame game2 = gameSrv.getByName("Ravnica");
+		AdmMember gameMaster2 = memberSrv.getByLogin("Beurrarghasst");
+		table2.setGame(game2);
+		table2.setGameMaster(gameMaster2);
+		table2.setOpenToNewPlayer(false);
+		table2.setRequirement("(me contacter pour recevoir informations et invitation)");
+			
 		tableSrv.insert(table);
+		tableSrv.insert(table2);
 	}
 
 	@Test
@@ -206,12 +255,45 @@ class InsertQueryTest {
 		pt6.setTable(table);
 		pt6.setSelected(false);
 		
+		AdmTable table2 = tableSrv.getById(2);
+		
+		AdmPlayerTable pt7 = new AdmPlayerTable();		
+		pt7.setMember(memberSrv.getByLogin("Fireloup"));
+		pt7.setTable(table2);
+		
+		AdmPlayerTable pt8 = new AdmPlayerTable();		
+		pt8.setMember(memberSrv.getByLogin("Brice"));
+		pt8.setTable(table2);
+		
+		AdmPlayerTable pt9 = new AdmPlayerTable();		
+		pt9.setMember(memberSrv.getByLogin("Azimute"));
+		pt9.setTable(table2);
+		
+		AdmPlayerTable pt10 = new AdmPlayerTable();		
+		pt10.setMember(memberSrv.getByLogin("Tibo"));
+		pt10.setTable(table2);
+		
+		AdmPlayerTable pt11 = new AdmPlayerTable();		
+		pt11.setMember(memberSrv.getByLogin("ashaba.cheshire"));
+		pt11.setTable(table2);
+		
+		AdmPlayerTable pt12 = new AdmPlayerTable();		
+		pt12.setMember(memberSrv.getByLogin("Poupoulee"));
+		pt12.setTable(table2);
+		
 		playerTableSrv.insert(pt1);
 		playerTableSrv.insert(pt2);
 		playerTableSrv.insert(pt3);
 		playerTableSrv.insert(pt4);
 		playerTableSrv.insert(pt5);
 		playerTableSrv.insert(pt6);
+		playerTableSrv.insert(pt7);
+		playerTableSrv.insert(pt8);
+		playerTableSrv.insert(pt9);
+		playerTableSrv.insert(pt10);
+		playerTableSrv.insert(pt11);
+		playerTableSrv.insert(pt12);
 	
 	}
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import asso.lh.dm.dao.IDAOAdmGame;
+import asso.lh.dm.dao.IDAOAdmTable;
 import asso.lh.dm.model.AdmGame;
 import asso.lh.dm.model.Theme;
 
@@ -14,6 +15,8 @@ public class AdmGameService {
 	
 	@Autowired
 	private IDAOAdmGame daoAdmGame;
+	@Autowired
+	private IDAOAdmTable daoAdmTable;
 	
 	public List<AdmGame> getAll(){
 		return daoAdmGame.findAll();
@@ -58,6 +61,7 @@ public class AdmGameService {
 	}
 	
 	public void delete(AdmGame game) {
-		
+		daoAdmTable.setGameNull(game);
+		daoAdmGame.delete(game);
 	}
 }
