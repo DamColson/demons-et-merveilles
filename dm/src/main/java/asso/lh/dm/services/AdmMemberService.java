@@ -10,7 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import asso.lh.dm.dao.IDAOAdmMember;
+import asso.lh.dm.dao.IDAOAdmPlayerTable;
+import asso.lh.dm.dao.IDAOAdmTable;
 import asso.lh.dm.model.AdmMember;
+import asso.lh.dm.model.AdmPlayerTable;
 import asso.lh.dm.model.Role;
 
 @Service
@@ -20,6 +23,17 @@ public class AdmMemberService implements UserDetailsService{
 	private IDAOAdmMember daoAdmMember;
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
+	@Autowired
+	private IDAOAdmTable daoAdmTable;
+	@Autowired
+	private IDAOAdmPlayerTable daoAdmPlayerTable;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return daoAdmMember.findByLogin(username).orElseThrow(()->{
+			throw new UsernameNotFoundException("Utilisateur inconnu");});
+	}
 	
 	public List<AdmMember> getAll(){
 		return daoAdmMember.findAll();
@@ -75,13 +89,19 @@ public class AdmMemberService implements UserDetailsService{
 	
 	public void delete(AdmMember member) {
 		
+		AdmMember anonymous = daoAdmMember.findByLogin("Anonyme").orElseThrow(()->new RuntimeException("Aucun membre n'existe pour ce login"));	
+		
+		if(!daoAdmTable.findByGameMaster(member).isEmpty()) {
+			daoAdmTable.setGameMasterAnonymous(member, anonymous);
+		}
+		
+		List<AdmPlayerTable> playersTable = daoAdmPlayerTable.findAllByMember(member);
+		
+		daoAdmPlayerTable.deleteAll(playersTable);
+		
+		daoAdmMember.delete(member);	
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return daoAdmMember.findByLogin(username).orElseThrow(()->{
-			throw new UsernameNotFoundException("Utilisateur inconnu");});
-	}
+	
 	
 }

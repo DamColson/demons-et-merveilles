@@ -40,7 +40,7 @@ public class AdmTable {
 	private boolean openToNewPlayer;
 		
 	@ManyToOne
-	@JoinColumn(nullable = false,name="game_id")
+	@JoinColumn(name="game_id")
 	private AdmGame game;
 	
 	@ManyToOne

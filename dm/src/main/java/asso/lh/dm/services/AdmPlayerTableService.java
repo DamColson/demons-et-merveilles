@@ -61,7 +61,7 @@ public class AdmPlayerTableService {
 	}
 	
 	public void delete(AdmPlayerTable playerTable) {
-		
+		daoPlayerTable.delete(playerTable);
 	}
 
 }
