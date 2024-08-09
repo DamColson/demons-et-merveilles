@@ -12,11 +12,12 @@ import asso.lh.dm.model.AdmGame;
 import asso.lh.dm.model.AdmMember;
 import asso.lh.dm.model.AdmPlayerTable;
 import asso.lh.dm.model.AdmTable;
-import asso.lh.dm.model.Theme;
+import asso.lh.dm.model.AdmTheme;
 import asso.lh.dm.services.AdmGameService;
 import asso.lh.dm.services.AdmMemberService;
 import asso.lh.dm.services.AdmPlayerTableService;
 import asso.lh.dm.services.AdmTableService;
+import asso.lh.dm.services.AdmThemeService;
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
@@ -30,7 +31,8 @@ class UpdateQueryTest {
 	AdmTableService tableSrv;
 	@Autowired
 	AdmPlayerTableService playerTableSrv;
-	
+	@Autowired
+	AdmThemeService themeSrv;
 	
 	
 	@Test
@@ -49,8 +51,11 @@ class UpdateQueryTest {
 	@Disabled
 	void updateGameTest() {
 		AdmGame game = gameSrv.getByName("Delta Green");
-		List<Theme> themes = game.getThemes();
-		themes.add(Theme.Moderne);
+		List<AdmTheme> themes = game.getThemes();
+		themes.add(themeSrv.getByName("Horreur"));
+		themes.add(themeSrv.getByName("Enquête"));
+		themes.add(themeSrv.getByName("Conspiration"));
+		themes.add(themeSrv.getByName("Onirique"));
 		game.setThemes(themes);
 		gameSrv.update(game);
 	}

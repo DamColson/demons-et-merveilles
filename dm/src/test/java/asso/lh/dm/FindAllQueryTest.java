@@ -13,10 +13,12 @@ import org.springframework.test.annotation.Commit;
 import asso.lh.dm.model.AdmGame;
 import asso.lh.dm.model.AdmMember;
 import asso.lh.dm.model.AdmTable;
+import asso.lh.dm.model.AdmTheme;
 import asso.lh.dm.services.AdmGameService;
 import asso.lh.dm.services.AdmMemberService;
 import asso.lh.dm.services.AdmPlayerTableService;
 import asso.lh.dm.services.AdmTableService;
+import asso.lh.dm.services.AdmThemeService;
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
@@ -30,6 +32,8 @@ class FindAllQueryTest {
 	AdmTableService tableSrv;
 	@Autowired
 	AdmPlayerTableService playerTableSrv;
+	@Autowired
+	AdmThemeService themeSrv;
 	
 	@Test
 	@Transactional
@@ -72,5 +76,17 @@ class FindAllQueryTest {
 			});
 			System.out.println("------------------");
 		});
+	}
+	
+	@Test
+	@Transactional
+	@Commit
+	@Disabled
+	void findAllThemes() {
+		List<AdmTheme> themes = themeSrv.getAll();
+		themes.stream().forEach(theme->{
+			System.out.println("Nom : " + theme.getName());
+		});
+		System.out.println("------------------");
 	}
 }

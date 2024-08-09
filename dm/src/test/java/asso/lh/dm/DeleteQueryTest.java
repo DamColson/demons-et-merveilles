@@ -10,11 +10,13 @@ import asso.lh.dm.model.AdmGame;
 import asso.lh.dm.model.AdmMember;
 import asso.lh.dm.model.AdmPlayerTable;
 import asso.lh.dm.model.AdmTable;
+import asso.lh.dm.model.AdmTheme;
 import asso.lh.dm.model.MemberTableKey;
 import asso.lh.dm.services.AdmGameService;
 import asso.lh.dm.services.AdmMemberService;
 import asso.lh.dm.services.AdmPlayerTableService;
 import asso.lh.dm.services.AdmTableService;
+import asso.lh.dm.services.AdmThemeService;
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
@@ -28,6 +30,8 @@ class DeleteQueryTest {
 	private AdmGameService gameSrv;
 	@Autowired
 	private AdmPlayerTableService playerTableSrv;
+	@Autowired
+	private AdmThemeService themeSrv;
 
 	@Test
 	@Commit
@@ -70,5 +74,12 @@ class DeleteQueryTest {
 		playerTableSrv.delete(playerTable);
 	}
 	
+	@Test
+	@Transactional
+	@Commit
+	void deleteThemeTest() {
+		AdmTheme theme = themeSrv.getByName("Conspiration");
+		themeSrv.delete(theme);
+	}
 
 }
