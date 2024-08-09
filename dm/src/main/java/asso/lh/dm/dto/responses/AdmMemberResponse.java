@@ -2,6 +2,13 @@ package asso.lh.dm.dto.responses;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class AdmMemberResponse {
 
 	@JsonView(CustomJsonViews.Common.class)
