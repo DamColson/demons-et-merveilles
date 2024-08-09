@@ -38,6 +38,9 @@ public class AdmPlayerTableService {
 		if(playerTable==null) {
 			throw new RuntimeException("élément null");
 		}
+		if(playerTable.getMember().getId()==playerTable.getTable().getGameMaster().getId()) {
+			throw new RuntimeException("Ce joueur est le MJ");
+		}
 		
 		MemberTableKey key = new MemberTableKey();
 		key.setMemberId(playerTable.getMember().getId());

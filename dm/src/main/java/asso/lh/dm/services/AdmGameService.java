@@ -1,14 +1,16 @@
 package asso.lh.dm.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import asso.lh.dm.dao.IDAOAdmGame;
 import asso.lh.dm.dao.IDAOAdmTable;
+import asso.lh.dm.dao.IDAOAdmTheme;
 import asso.lh.dm.model.AdmGame;
-import asso.lh.dm.model.Theme;
+import asso.lh.dm.model.AdmTheme;
 
 @Service
 public class AdmGameService {
@@ -17,6 +19,8 @@ public class AdmGameService {
 	private IDAOAdmGame daoAdmGame;
 	@Autowired
 	private IDAOAdmTable daoAdmTable;
+	@Autowired
+	private IDAOAdmTheme daoAdmTheme;
 	
 	public List<AdmGame> getAll(){
 		return daoAdmGame.findAll();
@@ -36,7 +40,7 @@ public class AdmGameService {
 		return daoAdmGame.findByName(name).orElseThrow(()->new RuntimeException("Aucun jeu n'existe pour ce nom"));
 	}
 	
-	public List<AdmGame> getByTheme(Theme theme) {
+	public List<AdmGame> getByTheme(AdmTheme theme) {
 		if(theme==null) {
 			throw new RuntimeException("theme null");
 		}
@@ -61,7 +65,13 @@ public class AdmGameService {
 	}
 	
 	public void delete(AdmGame game) {
+		
 		daoAdmTable.setGameNull(game);
+		
+		List<AdmTheme> themes = daoAdmTheme.findByGame(game);
+		
+		themes = themes.stream().peek(theme->theme.getGames().remove(game)).collect(Collectors.toList());
+		
 		daoAdmGame.delete(game);
 	}
 }

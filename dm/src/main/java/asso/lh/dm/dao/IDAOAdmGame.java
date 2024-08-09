@@ -8,14 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import asso.lh.dm.model.AdmGame;
-import asso.lh.dm.model.Theme;
+import asso.lh.dm.model.AdmTheme;
 
 public interface IDAOAdmGame extends JpaRepository<AdmGame, Integer> {
 
 	Optional<AdmGame> findByName(String name);
 	
-	@Query("select g from AdmGame g left join fetch g.themes as t where t = :theme")
-	List<AdmGame> findByTheme(@Param("theme") Theme theme);
+	@Query("select g from AdmGame g left join fetch g.themes where :theme MEMBER OF g.themes")
+	List<AdmGame> findByTheme(@Param("theme") AdmTheme theme);
 	
-	
+	@Query("select g from AdmGame g left join fetch g.themes where g.id=:id")
+	Optional<AdmGame> findByIdWithTheme(@Param("id") Integer id);	
 }
