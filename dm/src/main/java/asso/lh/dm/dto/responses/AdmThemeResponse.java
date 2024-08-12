@@ -15,8 +15,10 @@ public class AdmThemeResponse {
 
 	@JsonView(CustomJsonViews.Common.class)
 	private Integer id;
+	
 	@JsonView(CustomJsonViews.Common.class)
 	private String name;
+	
 	@JsonView(CustomJsonViews.ThemeWithGames.class)
 	private List<AdmGameResponse> gamesResponse;
 }
