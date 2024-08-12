@@ -16,8 +16,8 @@ public class AdmGameRequest {
 	private String name;
 	@NotBlank
 	private String Description;
-	@NotBlank.List(value = { @NotBlank })
-	private List<String> themes;
+	
+	private List<Integer> themesId;
 	
 	private List<Integer> tablesId;
 }
