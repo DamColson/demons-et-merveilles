@@ -32,5 +32,6 @@ public class AdmTableResponse {
 	@JsonView(CustomJsonViews.TableWithGameMaster.class)
 	private AdmMemberResponse gameMasterResponse;
 	
-	//private List<AdmPlayerTableResponse> playersTableResponse;
+	@JsonView(CustomJsonViews.TableWithPlayerTable.class)
+	private List<AdmPlayerTableResponse> playersTableResponse;
 }
