@@ -57,4 +57,18 @@ public class CustomJsonViews {
 	public class TableWithAttributes implements TableWithGame,TableWithGameMaster{
 		
 	}
+	
+	//PlayerTable Custom Views
+	
+	public interface PlayerTableWithTable extends Common{
+		
+	}
+	
+	public interface PlayerTableWithMember extends Common{
+		
+	}
+	
+	public class PlayerTableWithAttributes implements PlayerTableWithMember,PlayerTableWithTable{
+		
+	}
 }
