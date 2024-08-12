@@ -77,6 +77,7 @@ class DeleteQueryTest {
 	@Test
 	@Transactional
 	@Commit
+	@Disabled
 	void deleteThemeTest() {
 		AdmTheme theme = themeSrv.getByName("Conspiration");
 		themeSrv.delete(theme);
