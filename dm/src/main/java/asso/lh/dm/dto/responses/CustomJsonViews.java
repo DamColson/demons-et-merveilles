@@ -21,4 +21,8 @@ public class CustomJsonViews {
 	public class GameWithTables implements Common{
 		
 	}
+	
+	public class ThemeWithGames implements Common{
+		
+	}
 }

@@ -9,17 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class AdmGameResponse {
+@AllArgsConstructor
+public class AdmThemeResponse {
 
 	@JsonView(CustomJsonViews.Common.class)
 	private Integer id;
 	@JsonView(CustomJsonViews.Common.class)
 	private String name;
-	@JsonView(CustomJsonViews.Common.class)
-	private String description;
-	@JsonView(CustomJsonViews.GameWithThemes.class)
-	private List<AdmThemeResponse> themesResponse;
-	//private List<AdmTableResponse> tablesResponse;
+	@JsonView(CustomJsonViews.ThemeWithGames.class)
+	private List<AdmGameResponse> gamesResponse;
 }
