@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdmPlayerMemberRequest {
+public class AdmPlayerTableRequest {
 
 	@NotNull
 	private Integer tableId;

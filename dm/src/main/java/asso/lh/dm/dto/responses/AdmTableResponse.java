@@ -19,6 +19,9 @@ import lombok.NoArgsConstructor;
 public class AdmTableResponse {
 
 	@JsonView(CustomJsonViews.Common.class)
+	private Integer id;
+	
+	@JsonView(CustomJsonViews.Common.class)
 	private LocalDate date;
 	
 	@JsonView(CustomJsonViews.Common.class)
