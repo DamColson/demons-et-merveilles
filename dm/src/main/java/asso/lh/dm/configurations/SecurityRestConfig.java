@@ -22,7 +22,8 @@ public class SecurityRestConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http.csrf(csrf->csrf.disable());
 		http.authorizeHttpRequests(auth->{
-			auth.requestMatchers(HttpMethod.OPTIONS).permitAll()
+			auth.requestMatchers("/swagger-ui/**","/swagger-ui.html","/v3/**").permitAll()
+			.requestMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().permitAll();
 		});
 		
