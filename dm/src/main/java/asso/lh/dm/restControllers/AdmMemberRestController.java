@@ -130,7 +130,6 @@ public class AdmMemberRestController {
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@JsonView(CustomJsonViews.MemberWithAttributes.class)
 	public void delete(@PathVariable("id") Integer id) {
 		memberSrv.delete(memberSrv.getById(id));
 	}

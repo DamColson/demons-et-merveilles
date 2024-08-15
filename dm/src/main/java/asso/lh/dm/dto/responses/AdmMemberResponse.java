@@ -48,8 +48,10 @@ public class AdmMemberResponse {
 				this.playersTableResponse = member.getPlayersTable().stream().map(pt->{
 					return new AdmPlayerTableResponse(pt,false);
 				}).collect(Collectors.toList());
-				this.tablesResponse = member.getPlayersTable().stream().map(pt->{
-					return new AdmTableResponse(pt.getTable(),false);
+			}
+			if(member.getTables()!=null) {
+				this.tablesResponse = member.getTables().stream().map(table->{
+					return new AdmTableResponse(table,false);
 				}).collect(Collectors.toList());
 			}
 		}
