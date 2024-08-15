@@ -3,6 +3,7 @@ package asso.lh.dm.dto.requests;
 import java.time.LocalDate;
 import java.util.List;
 
+import asso.lh.dm.model.MemberTableKey;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,5 +27,5 @@ public class AdmTableRequest {
 	private Integer gameId;
 	@NotNull
 	private Integer gameMasterId;
-	private List<Integer> PlayersTableId;
+	private List<MemberTableKey> PlayersTableId;
 }
