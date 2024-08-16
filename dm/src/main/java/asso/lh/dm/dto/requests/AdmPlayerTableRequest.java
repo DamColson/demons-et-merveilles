@@ -13,6 +13,7 @@ public class AdmPlayerTableRequest {
 	@NotNull
 	private Integer tableId;
 	@NotNull
-	private Integer Memberid;
+	private Integer memberId;
+	
 	private boolean selected;
 }

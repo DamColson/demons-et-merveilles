@@ -99,7 +99,7 @@ public class AdmThemeRestController {
 		
 		theme.setId(id);
 		
-		return new AdmThemeResponse(themeSrv.insert(theme));
+		return new AdmThemeResponse(themeSrv.update(theme));
 	}
 	
 	@DeleteMapping("/{id}")
